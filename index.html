@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Kasey Kane-->
+<head>
+    <meta charset="UTF-8">
+    <title>Risk Calculator</title>
+</head>
+<body style='background-color:rgba(4, 141, 253, 0.829); border-style: double;'>
+    <h1 style='color:rgb(255, 255, 255); text-align:center;'>Health Insurance Risk Calculator</h1>
+    <h4 style='text-align:center;'>  
+        Welcome to the health insurance risk calculator. 
+        <br /><br />
+        In this application, the goal is to assess the risk associated with potentially insuring you as a new health insurance customer. This can be done using a variety of variables, however, we have gathered some in the questions below. 
+        <br /><br />
+        Please answer each question honestly to realistically assess your risk. 
+        <br /><br />
+        Reminder: For the variables chosen, the highest possible score is 235. To be determined as insurable, you must score 75 or below.  
+        </h4>
+    <br /><br />
+    <label> Height:</label>
+    <select id='q1'>
+        <option value='1.524'>4'8" to 5'</option>
+        <option value='1.5875'>5'1" to 5'4"</option>
+        <option value='1.6891'>5'5" to 5'8"</option>
+        <option value='1.7907'>5'9" to 6'</option>
+        <option value='1.8923'>6'1" to 6'4"</option>
+        <option value='1.9939'>6'5" to 6'8"</option>
+        <option value='2.0955'>6'9" to 7'</option>
+    </select>
+    <br /><br />
+
+    <label> Weight:</label>
+    <select id='q2'>
+        <option value='40.8233'>80 to 100lbs</option>
+        <option value='49.8952'>101 to 120lbs</option>
+        <option value='58.967'>121 to 140lbs</option>
+        <option value='68.0389'>141 to 160lbs</option>
+        <option value='77.1107'>161 to 180lbs</option>
+        <option value='86.1826'>181 to 200lbs</option>
+        <option value='95.2544'>201 to 220lbs</option>
+        <option value='104.326'>221 to 240lbs</option>
+        <option value='113.398'>241 to 260lbs</option>
+        <option value='122.47'>261 to 280lbs</option>
+        <option value='131.542'>281 to 300lbs</option>
+    </select>
+
+    <br /><br />
+    <button onclick='calculatingBMI()'>Calculate BMI</button>
+    <p id='BMI'> </p>
+    <br /><br />
+
+    <label> Age:</label>
+    <select id='q3'>
+        <option value='0'>Less than 30 years</option>
+        <option value='10'>Less than 45 years</option>
+        <option value='20'>Less than 60 years</option>
+        <option value='30'>Else</option>
+    </select>
+
+    <br /><br />
+    <label> BMI:</label>
+    <select id='q4'>
+        <option value='0'>Normal</option>
+        <option value='30'>Overweight</option>
+        <option value='75'>Else</option>
+    </select>
+    <br /><br />
+
+    <label> Blood Pressure:</label>
+    <select id='q5'>
+        <option value='0'>Normal</option>
+        <option value='15'>Elevated</option>
+        <option value='30'>Stage I</option>
+        <option value='75'>Stage II</option>
+        <option value='100'>Crisis</option>
+    </select>
+    <br /><br />
+
+    <label> Family Disease:</label>
+    <select id='q6'>
+        <option value='10'>Diabetes</option>
+        <option value='10'>Cancer</option>
+        <option value='10'>Alzheimers</option>
+        <option value='20'>2 of the 3 Above</option>
+        <option value='30'>All of the Above</option>
+        <option value='0'>None of the Above</option>
+    </select>
+    <br /><br />
+
+    <button onclick='calculateRisk()'>Calculate Risk</button>
+    <p id='Risk'> </p>
+
+<script>
+    console.log('calculatingBMI()')
+function calculatingBMI() {
+    let question1Response = document.getElementById('q1').selectedOptions[0].value;
+    let question2Response = document.getElementById('q2').selectedOptions[0].value;
+
+    console.log('Question 1 Answers:');
+    console.log(document.getElementById('q1').selectedOptions[0].text);
+    console.log(document.getElementById('q1').selectedOptions[0].value);
+    console.log(question1Response);
+
+    console.log('Question 2 Answers:');
+    console.log(document.getElementById('q2').selectedOptions[0].text);
+    console.log(document.getElementById('q2').selectedOptions[0].value);
+    console.log(question2Response);
+
+    let BMI = question2Response/(question1Response)**2
+    //document.getElementById('BMI').innerHTML = 'Your BMI is ' + Math.round(BMI) + displayBMI
+    
+    let underweight = '<h4>underweight. </h4>';
+    let healthyWeight = '<h4>a healthy weight. </h4>';
+    let overweight = '<h4>overweight. </h4>';
+    let obese = '<h4>obese. </h4>';
+    let displayBMI = '<h4> You are </h4>';
+
+    if (BMI < 18.5) {
+        displayBMI += underweight;
+    } else if (BMI <= 25) {
+        displayBMI += healthyWeight;
+    } else if (BMI <= 30) {
+        displayBMI += overweight;
+    } else {
+        displayBMI += obese;
+    }
+    document.getElementById('BMI').innerHTML = '<h2> Your BMI is ' + Math.round(BMI) + displayBMI + '</h2>'
+    console.log('BMI=' + BMI);
+}
+</script>
+
+<script>
+console.log('Start Risk Calculator');
+function calculateRisk() {
+    console.log('calculateRisk()');
+
+    const MAX_SCORE = 235;
+
+    let question3Response = document.getElementById('q3').selectedOptions[0].value;
+    let question4Response = document.getElementById('q4').selectedOptions[0].value;
+    let question5Response = document.getElementById('q5').selectedOptions[0].value;
+    let question6Response = document.getElementById('q6').selectedOptions[0].value;
+    
+
+    console.log('Question 3 Answers:');
+    console.log(document.getElementById('q3').selectedOptions[0].text);
+    console.log(document.getElementById('q3').selectedOptions[0].value);
+    console.log(question3Response);
+
+    console.log('Question 4 Answers:');
+    console.log(document.getElementById('q4').selectedOptions[0].text);
+    console.log(document.getElementById('q4').selectedOptions[0].value);
+    console.log(question4Response);
+
+    console.log('Question 5 Answers:');
+    console.log(document.getElementById('q5').selectedOptions[0].text);
+    console.log(document.getElementById('q5').selectedOptions[0].value);
+    console.log(question5Response);
+
+    console.log('Question 6 Answers:');
+    console.log(document.getElementById('q6').selectedOptions[0].text);
+    console.log(document.getElementById('q6').selectedOptions[0].value);
+    console.log(question6Response);
+
+
+//calculating compatibilty scores
+    let question3Risk = Math.abs(question3Response);
+    let question4Risk = Math.abs(question4Response);
+    let question5Risk = Math.abs(question5Response);
+    let question6Risk = Math.abs(question6Response);
+    //let question5Risk = Math.abs((question6Response)/((question5Response)^2))
+    
+    let totalRisk = question3Risk + question4Risk + question5Risk + question6Risk;
+    //let totalRisk = question1Risk + question3Risk + question4Risk + question5Risk;
+    totalRisk = Math.round(totalRisk);
+    console.log('totalRisk=' + totalRisk);
+
+    //let totalCompatibility = question1Compatibility + question2Compatibility + question3Compatibility + question4Compatibility;
+    //totalCompatibility *= 100/MAX_SCORE;
+    //totalCompatibility = Math.round(totalCompatibility);
+    //console.log('totalCompatibility=' + totalCompatibility);
+
+//setting threshhold scores
+    let threshhold = '<h4> You are considered low risk.</h4>';
+    let threshhold2 = '<h4> You are considered moderate risk.</h4>';
+    let threshhold3 = '<h4> You are considered high risk.</h4>'
+    let threshhold4 = '<h1> You are considered uninsurable.</h1>'
+    let userOutput = '<h2> Your total risk is ' + totalRisk + ' of 235 total possible risk points. </h2>';
+    
+    if (totalRisk <= 20) {
+        userOutput += threshhold;
+    } else if (totalRisk <= 50) {
+        userOutput += threshhold2;
+    } else if (totalRisk <= 75) {
+        userOutput += threshhold3;
+    } else {
+        userOutput += threshhold4;
+    }
+    
+    //document.getElementById('Risk').innerHTML = displayBMI;
+    document.getElementById('Risk').innerHTML = userOutput;
+
+}
+</script>
+
+</body>
+</html>
